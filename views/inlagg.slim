@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
+  body
+    .cards
+      - cards = [
+        { img: "https://fakeimg.pl/400x300/009578/fff/", likes: 310 },
+        { img: "https://fakeimg.pl/400x300/252c6a/fff/", likes: 1993 },
+        { img: "https://fakeimg.pl/400x300/f1db26/000/", likes: 887 },
+        { img: "https://fakeimg.pl/400x300/252c6a/fff/", likes: 2512 },
+        { img: "https://fakeimg.pl/400x300/009578/fff/", likes: 140 }
+      ]
+      - cards.each do |card|
+        .card
+          img.card__image src=card[:img] alt=""
+          .card__content
+            p
+              | Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ducimus id ab tenetur delectus reiciendis fugit autem qui at.
+            p
+              | Alias itaque praesentium eum, pariatur consequatur ducimus asperiores accusantium velit minima?
+          .card__info
+            div
+              i.material-icons thumb_up
+              | #{card[:likes]}
+            div
+              a.card__link href="./" View Article
