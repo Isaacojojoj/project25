@@ -16,10 +16,12 @@ get('/')  do
   end
   
 get('/inlagg') do
-     db = db_connection
-    # result = db.execute("SELECT * FROM albums")
-    # p result
-    slim(:inlagg)
+    images = [
+        "img/tarta.jpg",
+        "img/lax.jpg",
+        "img/ägg.jpg"
+    ]
+    slim(:inlagg, locals: { images: images })
 end
 
 post('/inlagg/new') do
