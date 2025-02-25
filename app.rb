@@ -16,32 +16,32 @@ get('/')  do
   end
   
 get('/inlagg') do
-    images = [
-        "img/tarta.jpg",
-        "img/lax.jpg",
-        "img/ägg.jpg"
-    ]
-    slim(:inlagg, locals: { images: images })
+   slim(:inlagg)
 end
 
-post('/inlagg/new') do
-    title = params[:title]
-    artist_id = params[:artist_id].to_i
-    p "Vi fick in datan #{title} och #{artist_id}"
-    db = SQLite3::Database.new("db/chinook-crud.db")
-    db.execute("INSERT INTO albums (Title, ArtistId) VALUES (?,?)",[title, artist_id])
-    redirect('/albums')
-  end
-
-get('/inlagg/:inlagg_id') do
-    list = ["Apple", "Orange", "Banana", "Grillkorv"]
-	fruit_id = params["fruit_id"].to_i
-
-	response = list[fruit_id]
-
-	return response
-end
 
 get('/about') do
     slim(:about)
 end
+
+get('/image/new') do
+
+slim(:upload_image)
+end
+
+post('/image') do
+    #Skapa en sträng med join "./public/uploaded_pictures/cat.png"
+    path = File.join("./public/img/",params[:file][:filename])
+    
+    #Spara bilden (skriv innehållet i tempfile till destinationen path)
+    File.write(path,File.read(params[:file][:tempfile]))
+    db = SQLite3::Database.new(”db/store.db”)
+
+    # db.execute(”INSERT INTO recept (img,) VALUES (?,?)”,[img, tel])
+    # redirect(’/’)
+    
+    redirect('/inlagg')
+   end
+   
+   
+   
